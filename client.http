@@ -1,4 +1,4 @@
-POST http://localhost:10003/payments
+POST http://localhost:10000/payments
 Accept: application/json
 Content-Type: application/json
 
@@ -8,31 +8,31 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/payments/0481ebd5-7ecf-4844-926e-9b86910a5dc9
+GET http://localhost:10000/payments/0481ebd5-7ecf-4844-926e-9b86910a5dc9
 Accept: application/json
 Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/payments/started?pageNumer=0
+GET http://localhost:10000/payments/started?pageNumer=0
 Accept: application/json
 Content-Type: application/json
 
 ###
 
-GET http://localhost:8888/master/application-default.yml
+GET http://localhost:8888/001-Base-components/application-default.yml
 
 ###
 
-GET http://localhost:8888/master/application-development.yml
+GET http://localhost:8888/001-Base-components/application-development.yml
 
 ###
 
-GET http://localhost:8888/master/payments-service.yml
+GET http://localhost:8888/001-Base-components/payments-service.yml
 
 ###
 
-GET http://localhost:8888/master/payments-service-development.properties
+GET http://localhost:8888/001-Base-components/payments-service-development.properties
 
 ###
 
