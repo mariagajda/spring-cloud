@@ -1,7 +1,0 @@
-eureka:
-  #client:
-  #  registerWithEureka: false #standalone
-  #  fetchRegistry: false #standalone
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8762/eureka/

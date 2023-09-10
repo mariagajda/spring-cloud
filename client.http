@@ -17,29 +17,3 @@ Content-Type: application/json
 GET http://localhost:10000/payments/started?pageNumer=0
 Accept: application/json
 Content-Type: application/json
-
-###
-
-GET http://localhost:8888/001-Base-components/application-default.yml
-
-###
-
-GET http://localhost:8888/001-Base-components/application-development.yml
-
-###
-
-GET http://localhost:8888/001-Base-components/payments-service.yml
-
-###
-
-GET http://localhost:8888/001-Base-components/payments-service-development.properties
-
-###
-
-POST http://localhost:8080/api/shop/payments
-Accept: application/json
-Content-Type: application/json
-
-{
-  "value": "200 PLN"
-}
