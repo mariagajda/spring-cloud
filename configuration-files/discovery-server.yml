@@ -1,5 +1,10 @@
 server:
   port: 8761
 eureka:
-  client:
-    should-enforce-registration-at-init: false
+  instance:
+    prefer-ip-address: true
+
+
+#eureka:
+#  client:
+#    should-enforce-registration-at-init: false

@@ -43,3 +43,7 @@ GET http://localhost:8888/001-Base-components/payments-service.yml
 ###
 
 GET http://localhost:8888/001-Base-components/payments-service-development.yml
+
+###
+
+GET http://localhost:8888/payments-service/default/001-Base-components/data.xml
