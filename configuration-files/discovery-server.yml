@@ -3,6 +3,5 @@ server:
 eureka:
   instance:
     prefer-ip-address: true
-#eureka:
-#  client:
-#    should-enforce-registration-at-init: false
+  client:
+    should-enforce-registration-at-init: false
