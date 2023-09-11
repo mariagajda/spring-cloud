@@ -47,3 +47,13 @@ GET http://localhost:8888/001-Base-components/payments-service-development.yml
 ###
 
 GET http://localhost:8888/payments-service/default/001-Base-components/data.xml
+
+###
+
+POST http://localhost:8080/api/shop/payments
+Accept: application/json
+Content-Type: application/json
+
+{
+  "value": "200 PLN"
+}
