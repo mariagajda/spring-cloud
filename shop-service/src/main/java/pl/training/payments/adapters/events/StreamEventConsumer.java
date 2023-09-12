@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.function.Consumer;
 
 @Log
-@Component("paymentEventsConsumer")
+//@Component("paymentEventsConsumer")
 public class StreamEventConsumer implements Consumer<PaymentEventDto> {
 
     @Override
