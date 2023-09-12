@@ -3,7 +3,7 @@ spring:
     openfeign:
       client:
         config:
-          default:
+          PAYMENTS-SERVICE: #default:
             logger-level: basic
 logging:
   level:
