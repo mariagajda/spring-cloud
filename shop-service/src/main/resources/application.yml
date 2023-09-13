@@ -8,3 +8,5 @@ spring:
   cloud:
     config:
       label: 006-Security
+encrypt:
+  key: SYMWWOQWCFEY
