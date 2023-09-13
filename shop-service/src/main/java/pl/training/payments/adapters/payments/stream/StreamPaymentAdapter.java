@@ -1,5 +1,6 @@
 package pl.training.payments.adapters.payments.stream;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -19,7 +20,7 @@ public class StreamPaymentAdapter {
 
     private final DiscoveryClient discoveryClient;
 
-    //@PostConstruct
+    @PostConstruct
     public void init() {
         WebClient.builder()
                 .build()
