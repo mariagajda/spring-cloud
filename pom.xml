@@ -18,6 +18,7 @@
     </properties>
 
     <modules>
+        <module>reactive-payments-service</module>
         <module>payments-service</module>
         <module>payments-domain</module>
         <module>shop-service</module>
