@@ -11,14 +11,15 @@ import reactor.core.publisher.Sinks;
 public class ReactivePaymentService {
 
     private final PaymentRepository paymentRepository;
-    private final Sinks.Many<Payment> paymentMany = Sinks.many().replay().all();
+    private final Sinks.Many<Payment> paymentMany = Sinks.many().replay().all(10);
 
     public Flux<Payment> getAllPayments() {
         return paymentRepository.getAll();
     }
 
     public Mono<Payment> process(Mono<Payment> payment) {
-        return payment.map(Payment::confirmed)
+        return payment
+                .map(Payment::confirmed)
                 .flatMap(paymentRepository::persist)
                 .doOnNext(paymentMany::tryEmitNext);
     }

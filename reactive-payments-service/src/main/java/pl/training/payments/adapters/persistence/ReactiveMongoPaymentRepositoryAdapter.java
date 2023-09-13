@@ -19,7 +19,6 @@ public class ReactiveMongoPaymentRepositoryAdapter implements PaymentRepository 
         var paymentDocument = mapper.toDocument(payment);
         return paymentRepository.save(paymentDocument)
                 .map(mapper::toDomain);
-
     }
 
     @Override

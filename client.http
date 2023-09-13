@@ -107,3 +107,14 @@ POST http://localhost:8888/monitor
 Content-Type: application/x-www-form-urlencoded
 
 path=shop-service
+
+
+###
+
+POST http://localhost:10003/payments
+Accept: application/json
+Content-Type: application/json
+
+{
+  "value": "200 PLN"
+}
