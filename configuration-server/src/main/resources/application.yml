@@ -8,3 +8,5 @@ spring:
           uri: https://github.com/landrzejewski/spring-cloud
           search-paths: configuration-files
           try-master-branch: false
+encrypt:
+  key: SYMWWOQWCFEY
