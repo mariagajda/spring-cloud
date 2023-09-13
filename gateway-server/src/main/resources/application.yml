@@ -5,7 +5,7 @@ spring:
     import: optional:configserver:http://localhost:8888,optional:configserver:http://localhost:8889
   cloud:
     config:
-      label: 005-Logging-and-monitoring
+      label: 006-Security
       #fail-fast: true
   profiles:
     active: development
