@@ -1,5 +1,8 @@
 package pl.training.payments;
 
+import feign.Capability;
+import feign.micrometer.MicrometerCapability;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -43,6 +46,11 @@ public class ShopConfiguration {
     public DiscountCalculator discountCalculator(@Value("${discount}") long discount) {
         log.info("Creating discount calculator");
         return new ConstantDiscountCalculator(discount);
+    }
+
+    @Bean
+    public Capability capability(final MeterRegistry registry) {
+        return new MicrometerCapability(registry);
     }
 
 }
