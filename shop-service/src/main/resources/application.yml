@@ -10,3 +10,4 @@ spring:
       label: 006-Security
 encrypt:
   key: SYMWWOQWCFEY
+
