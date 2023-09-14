@@ -6,6 +6,15 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8100/realms/training
+      client:
+        registration:
+          keycloak:
+            client-id: shop
+            scope:
+              - openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8100/realms/training
 eureka:
   client:
     serviceUrl:
