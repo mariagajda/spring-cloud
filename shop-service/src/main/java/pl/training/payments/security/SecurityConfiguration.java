@@ -12,6 +12,8 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,6 +36,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(config -> config
                         .requestMatchers("/actuator").hasRole("ADMIN")
                         .requestMatchers("/**").authenticated()
+                )
+                .logout(config -> config
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout.html"))
+                        .addLogoutHandler(new KeycloakLogoutHandler(new RestTemplate()))
+                        .logoutSuccessUrl("/index.html")
                 )
                 .build();
     }
