@@ -71,6 +71,7 @@ Content-Type: application/json
 ###
 
 POST http://localhost:20000/orders
+Authorization: bearer {{ token }}
 Accept: application/json
 Content-Type: application/json
 
@@ -139,7 +140,7 @@ b8fe00fe431ce1eaf7b62bbfc93569dcc0258206fd2c0f3c922431f3e453f0e4
 POST http://localhost:8100/realms/training/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=training-client&grant_type=password&username=client&password=123
+client_id=shop&grant_type=password&username=client&password=123
 
 > {%
     client.global.set('token', response.body.access_token);
@@ -153,7 +154,7 @@ client_id=training-client&grant_type=password&username=client&password=123
 POST http://localhost:8100/realms/training/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=training-client&grant_type=refresh_token&refresh_token={{ refreshToken }}
+client_id=shop&grant_type=refresh_token&refresh_token={{ refreshToken }}
 
 > {%
     client.global.set('token', response.body.access_token);
