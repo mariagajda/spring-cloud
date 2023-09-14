@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer.UserInfoEndpointConfig;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,23 +13,15 @@ import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Configuration
 public class SecurityConfiguration {
 
+    private static final String REALM_CLAIM = "realm_access";
+    private static final String ROLES = "roles";
     private static final String ROLE_PREFIX = "ROLE_";
-
-    @Bean
-    public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        var jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakGrantedAuthorityConverter());
-        return jwtAuthenticationConverter;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -48,11 +40,16 @@ public class SecurityConfiguration {
 
     private void jwtConfig(OAuth2ResourceServerConfigurer<HttpSecurity>.JwtConfigurer jwtConfigurer) {
         var converter = new JwtAuthenticationConverter();
-        converter.setJwtGrantedAuthoritiesConverter(new KeycloakGrantedAuthorityConverter());
+        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            Map<String, List<String>> realm = jwt.getClaim(REALM_CLAIM);
+            return mapAuthorities(realm.get(ROLES));
+        });
         jwtConfigurer.jwtAuthenticationConverter(converter);
     }
 
-    private void configure(OAuth2LoginConfigurer.UserInfoEndpointConfig config) {
+    // Requires Client scopes -> Client scope details -> Mapper details -> Add to userinfo enabled (Keycloak Admin console)
+    @SuppressWarnings("unchecked")
+    private void configure(UserInfoEndpointConfig config) {
         config.userAuthoritiesMapper(authorities -> {
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
             var authority = authorities.iterator().next();
@@ -60,34 +57,25 @@ public class SecurityConfiguration {
             if (isOidc) {
                 var oidcUserAuthority = (OidcUserAuthority) authority;
                 var userInfo = oidcUserAuthority.getUserInfo();
-
-                if (userInfo.hasClaim("realm_access")) {
-                    var realmAccess = userInfo.getClaimAsMap("realm_access");
-                    var roles = (Collection<String>) realmAccess.get("roles");
-                    mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
-                }
+                var realmAccess = userInfo.getClaimAsMap(REALM_CLAIM);
+                var roles = (Collection<String>) realmAccess.get(ROLES);
+                mappedAuthorities.addAll(mapAuthorities(roles));
             } else {
                 var oauth2UserAuthority = (OAuth2UserAuthority) authority;
-                Map<String, Object> userAttributes = oauth2UserAuthority.getAttributes();
-
-                if (userAttributes.containsKey("realm_access")) {
-                    var realmAccess = (Map<String, Object>) userAttributes.get("realm_access");
-                    var roles = (Collection<String>) realmAccess.get("roles");
-                    mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
-                }
+                var userAttributes = oauth2UserAuthority.getAttributes();
+                var realmAccess = (Map<String, Object>) userAttributes.get(REALM_CLAIM);
+                var roles = (Collection<String>) realmAccess.get(ROLES);
+                mappedAuthorities.addAll(mapAuthorities(roles));
             }
-
             return mappedAuthorities;
         });
     }
 
-
-    Collection<GrantedAuthority> generateAuthoritiesFromClaim(Collection<String> roles) {
+    public Collection<GrantedAuthority> mapAuthorities(Collection<String> roles) {
         return roles.stream()
                 .map(role -> ROLE_PREFIX + role)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
     }
-
 
 }
