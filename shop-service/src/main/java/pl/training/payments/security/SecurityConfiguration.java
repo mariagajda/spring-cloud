@@ -23,6 +23,7 @@ public class SecurityConfiguration {
                 .cors(config -> {})
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(config -> config.requestMatchers("/**").hasRole("ADMIN"))
+                .oauth2Login(config -> {})
                 .oauth2ResourceServer(config -> config.jwt(jwtConfig -> {}))
                 .build();
     }
