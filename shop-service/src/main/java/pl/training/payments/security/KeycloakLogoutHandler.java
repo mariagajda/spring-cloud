@@ -27,7 +27,6 @@ public class KeycloakLogoutHandler implements LogoutHandler {
                 .fromUriString(endSessionEndpoint)
                 .queryParam(ID_TOKEN_HINT, user.getIdToken().getTokenValue());
         restTemplate.getForObject(builder.toUriString(), String.class);
-        System.out.println();
     }
 
 }

@@ -41,6 +41,7 @@ public class SecurityConfiguration {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout.html"))
                         .addLogoutHandler(new KeycloakLogoutHandler(new RestTemplate()))
                         .logoutSuccessUrl("/index.html")
+                        .invalidateHttpSession(true)
                 )
                 .build();
     }
