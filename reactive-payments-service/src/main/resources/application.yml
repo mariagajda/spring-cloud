@@ -7,7 +7,7 @@ spring:
     import: optional:configserver:http://localhost:8888,optional:configserver:http://localhost:8889
   cloud:
     config:
-      label: 006-Security
+      label: 006-Docker
       #fail-fast: on
       #request-connect-timeout: 10
       #request-read-timeout: 10
