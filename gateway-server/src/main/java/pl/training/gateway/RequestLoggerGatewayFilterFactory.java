@@ -12,6 +12,11 @@ import static java.util.logging.Logger.getLogger;
 
 @Component
 public class RequestLoggerGatewayFilterFactory extends AbstractGatewayFilterFactory<RequestLoggerGatewayFilterFactory.Config> {
+
+    public RequestLoggerGatewayFilterFactory() {
+        super(Config.class);
+    }
+
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
@@ -22,7 +27,7 @@ public class RequestLoggerGatewayFilterFactory extends AbstractGatewayFilterFact
 
     @Override
     public List<String> shortcutFieldOrder() {
-        return singletonList("level,name");
+        return List.of("level", "name");
     }
 
     public static class Config {
