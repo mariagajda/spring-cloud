@@ -1,14 +1,9 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/shop
-    username: admin
-    password: admin
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    generate-ddl: true
-    open-in-view: false
-  messages:
-    basename: exceptions
-logging:
-  level:
-    org.javamoney.moneta: OFF
+  application:
+    name: payments-service
+  config:
+    import: optional:configserver:http://localhost:8888,optional:configserver:http://localhost:8889 # wskazuje adres serwera konfiguracyjnego
+  cloud:
+    config:
+      label: 000-Starter # może oznaczać brancha lub tag
+      #fail-fast: true # w przypadku braku dostępności serwera konfiguracji, aplikacja zakończy działanie (wyjątek)
