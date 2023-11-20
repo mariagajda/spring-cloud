@@ -61,3 +61,9 @@ Content-Type: application/json
 {
   "value": "200 PLN"
 }
+
+###
+
+GET http://localhost:8080/api/shop/payments/8be5075e-1eb2-4549-818e-69a012ac39e0
+Accept: application/json
+Content-Type: application/json
