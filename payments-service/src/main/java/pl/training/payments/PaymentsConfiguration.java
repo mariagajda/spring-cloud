@@ -8,6 +8,7 @@ import pl.training.payments.adapters.time.SystemTimeProvider;
 import pl.training.payments.domain.*;
 import pl.training.payments.ports.PaymentRepository;
 import pl.training.payments.ports.PaymentService;
+import pl.training.payments.ports.PaymentsEventEmitter;
 import pl.training.payments.ports.TimeProvider;
 
 @EnableFeignClients
@@ -26,8 +27,8 @@ public class PaymentsConfiguration {
 
     @Bean
     public PaymentService paymentService(PaymentIdGenerator paymentIdGenerator, PaymentFeeCalculator paymentFeeCalculator,
-                                         PaymentRepository paymentRepository, TimeProvider timeProvider) {
-        return new PaymentProcessor(paymentIdGenerator, paymentFeeCalculator, paymentRepository, timeProvider);
+                                         PaymentRepository paymentRepository, TimeProvider timeProvider, PaymentsEventEmitter eventEmitter) {
+        return new PaymentProcessor(paymentIdGenerator, paymentFeeCalculator, paymentRepository, eventEmitter, timeProvider);
     }
 
     @Bean
