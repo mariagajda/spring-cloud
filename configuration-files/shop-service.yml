@@ -1,5 +1,14 @@
 server:
   port: 20000
+spring:
+  cloud:
+    function:
+      definition: paymentEventConsumer
+    stream:
+      bindings:
+        paymentEventConsumer-in-0:
+          destination: payment-events
+          group: ${random.uuid} #shop
 api:
   payments: http://PAYMENTS-SERVICE/payments
 discount: 10

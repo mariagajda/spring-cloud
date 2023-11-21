@@ -8,6 +8,7 @@ import pl.training.payments.commons.Page;
 import pl.training.payments.commons.ResultPage;
 import pl.training.payments.ports.PaymentRepository;
 import pl.training.payments.ports.PaymentService;
+import pl.training.payments.ports.PaymentsEventEmitter;
 import pl.training.payments.ports.TimeProvider;
 
 @Atomic
@@ -18,12 +19,14 @@ public class PaymentProcessor implements PaymentService {
     private final PaymentIdGenerator paymentIdGenerator;
     private final PaymentFeeCalculator paymentFeeCalculator;
     private final PaymentRepository paymentsRepository;
+    private final PaymentsEventEmitter eventEmitter;
     private final TimeProvider timeProvider;
 
     @Override
     public Payment process(PaymentRequest paymentRequest) {
         var paymentValue = calculatePaymentValue(paymentRequest.getValue());
         var payment = createPayment(paymentValue);
+        eventEmitter.emit(new PaymentUpdated(payment.getId(), payment.getStatus()));
         log.info("Payment created " + payment);
         return paymentsRepository.save(payment);
     }
