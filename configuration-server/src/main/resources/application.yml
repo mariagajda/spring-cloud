@@ -8,4 +8,4 @@ spring:
           uri: https://github.com/landrzejewski/spring-cloud
           search-paths: configuration-files # katalog/katalogi z plikami konfiguracyjnymi
           try-master-branch: false # w przypadku braku brancha master
-          skip-ssl-validation: true # w przypadku ogranicze? wynikaj?cych z wykorzystania vpn, proxy
+          skip-ssl-validation: true # w przypadku ograniczeń wynikających z wykorzystania vpn, proxy
