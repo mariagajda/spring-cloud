@@ -2,8 +2,8 @@ server:
   port: 20000
 spring:
   cloud:
-#    function:
-#      definition: paymentEventConsumer
+    function:
+      definition: paymentEventConsumer
     stream:
       bindings:
         paymentEventConsumer-in-0:
