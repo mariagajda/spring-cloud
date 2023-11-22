@@ -47,8 +47,8 @@ services:
   logstash-server:
     image: docker.elastic.co/logstash/logstash:7.14.1
     restart: always
-    depends_on:
-      - elastic-server
+#    depends_on:
+#      - elastic-server
     container_name: logstash
     command:
       logstash -f /etc/logstash/conf.d/logstash.conf

@@ -85,3 +85,10 @@ Content-Type: application/json
   "value": "200",
   "currency": "PLN"
 }
+
+###
+
+POST http://localhost:8100/realms/training/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=training-client&grant_type=password&username=admin&password=admin
