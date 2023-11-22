@@ -3,10 +3,10 @@ server:
 spring:
   cloud:
     function:
-      definition: paymentEventConsumer
+      definition: paymentEventsConsumer
     stream:
       bindings:
-        paymentEventConsumer-in-0:
+        paymentEventsConsumer-in-0:
           destination: payment-events
           group: ${random.uuid} #shop
 #    stream:
@@ -27,4 +27,4 @@ spring:
 #                      brokers: localhost:9092
 api:
   payments: http://PAYMENTS-SERVICE/payments
-discount: 10
+discount: 20

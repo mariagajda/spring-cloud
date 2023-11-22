@@ -3,4 +3,6 @@ logging:
     org.javamoney.moneta: OFF
 eureka:
   client:
-    should-enforce-registration-at-init: true # wymusza rejestrację w service discovery, w innym przypadku uniemożliwia start (wyjątek)
+    should-enforce-registration-at-init: true
+  instance:
+    prefer-ip-address: true

@@ -2,6 +2,6 @@ server:
   port: 8761
 eureka:
   instance:
-    prefer-ip-address: true # powoduje preferowanie adresów ip zamiast domen (może rozwiązywać problem występujący na windows z Docker)
+    prefer-ip-address: true
   client:
     should-enforce-registration-at-init: false

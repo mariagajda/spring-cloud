@@ -6,6 +6,5 @@ spring:
       server:
         git:
           uri: https://github.com/landrzejewski/spring-cloud
-          search-paths: configuration-files # katalog/katalogi z plikami konfiguracyjnymi
-          try-master-branch: false # w przypadku braku brancha master
-          skip-ssl-validation: true # w przypadku ograniczeń wynikających z wykorzystania vpn, proxy
+          search-paths: configuration-files
+          try-master-branch: false
