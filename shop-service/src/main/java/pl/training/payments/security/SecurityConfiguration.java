@@ -1,9 +1,11 @@
-package pl.training.payments;
+package pl.training.payments.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -14,12 +16,18 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(config -> config
-                        .anyRequest().authenticated()
+                        .anyRequest().hasRole("ADMIN")
                 )
                 .oauth2ResourceServer(config -> config
-                        .jwt(jwtConfigurer -> {})
+                        .jwt(this::jwtConfigurer)
                 )
                 .build();
+    }
+
+    private void jwtConfigurer(OAuth2ResourceServerConfigurer.JwtConfigurer jwtConfigurer) {
+            var jwtConverter = new JwtAuthenticationConverter();
+            jwtConverter.setJwtGrantedAuthoritiesConverter(new KeycloakJwtGrantedAuthoritiesConverter());
+            jwtConfigurer.jwtAuthenticationConverter(jwtConverter);
     }
 
 }
