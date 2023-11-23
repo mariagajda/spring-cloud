@@ -9,3 +9,5 @@ spring:
           search-paths: configuration-files
           try-master-branch: false
           skip-ssl-validation: true
+encrypt:
+  key: WHMEYTICKEYA
