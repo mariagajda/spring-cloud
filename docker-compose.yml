@@ -10,15 +10,15 @@ services:
   configuration-server:
     image: configuration-server
     restart: on-failure
-#    ports:
-#      - "8888:8888"
+    ports:
+      - "8888:8888"
     environment:
       PORT: 8888
       GIT_URI: https://github.com/landrzejewski/spring-cloud
       KAFKA_BROKERS: kafka-server:9092
       ENCRYPT_KEY: SYMWWOQWCFEY
-    deploy:
-      replicas: 4
+#    deploy:
+#      replicas: 4
   discovery-server:
     image: discovery-server
     restart: on-failure
