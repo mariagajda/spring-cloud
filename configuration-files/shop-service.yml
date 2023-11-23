@@ -28,3 +28,12 @@ spring:
 api:
   payments: http://PAYMENTS-SERVICE/payments
 discount: "{cipher}abb1ccca50bee79b98939159e9df13bf4f9715aa23fa6d0d305936bfb977b96a"
+resilience4j.retry:
+  instances:
+    payments:
+      maxAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - java.lang.RuntimeException
