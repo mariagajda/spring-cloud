@@ -126,4 +126,6 @@ Content-Type: text/plain
 
 abb1ccca50bee79b98939159e9df13bf4f9715aa23fa6d0d305936bfb977b96a
 
+###
 
+GET http://localhost:8888/000-Starter/shop-service-development.properties
