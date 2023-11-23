@@ -38,7 +38,7 @@ GET http://localhost:8888/001-Base-components/application-development.yml
 
 ###
 
-GET http://localhost:8888/007-Docker/gateway-server-default.yml
+GET http://localhost:8888/007-Docker/gateway-server-production.yml
 
 ###
 
