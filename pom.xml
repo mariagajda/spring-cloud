@@ -19,7 +19,6 @@
 
     <modules>
         <module>payments-service</module>
-        <module>payments-domain</module>
     </modules>
 
 </project>
