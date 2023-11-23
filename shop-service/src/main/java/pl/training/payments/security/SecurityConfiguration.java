@@ -16,8 +16,9 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(config -> config
-                        .anyRequest().hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
+                .oauth2Login(config -> {})
                 .oauth2ResourceServer(config -> config
                         .jwt(this::jwtConfigurer)
                 )
