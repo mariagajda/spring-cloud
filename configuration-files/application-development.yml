@@ -12,6 +12,10 @@ spring:
             client-id: training-client
             scope:
               - openid
+#          github:
+#            client-id: xx
+#            client-secret: xxx
+#            #redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           keycloak:
             issuer-uri: http://localhost:8100/realms/training

@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
+import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -19,7 +20,7 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(config -> config
-                        .anyRequest().hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .oauth2Login(config -> config.userInfoEndpoint(this::userInfoCustomizer))
                 .oauth2ResourceServer(config -> config
@@ -27,6 +28,7 @@ public class SecurityConfiguration {
                 )
                 .logout(config -> config
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout.html"))
+                        .invalidateHttpSession(true)
                         .addLogoutHandler(new KeycloakLogoutHandler(new RestTemplate()))
                         .logoutSuccessUrl("/index.html")
                 )
