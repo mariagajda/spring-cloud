@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.cli
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class SecurityConfiguration {
@@ -22,6 +24,11 @@ public class SecurityConfiguration {
                 .oauth2Login(config -> config.userInfoEndpoint(this::userInfoCustomizer))
                 .oauth2ResourceServer(config -> config
                         .jwt(this::jwtConfigurer)
+                )
+                .logout(config -> config
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout.html"))
+                        .addLogoutHandler(new KeycloakLogoutHandler(new RestTemplate()))
+                        .logoutSuccessUrl("/index.html")
                 )
                 .build();
     }
