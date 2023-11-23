@@ -1,11 +1,7 @@
 spring:
   application:
     name: gateway-server
-  config:
-    import: optional:configserver:http://localhost:8888,optional:configserver:http://localhost:8889
   cloud:
     config:
-      label: 006-Docker
-      #fail-fast: true
-  profiles:
-    active: development
+      label: 007-Docker
+

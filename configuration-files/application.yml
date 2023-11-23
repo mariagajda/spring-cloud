@@ -4,8 +4,8 @@ logging:
 eureka:
   client:
     should-enforce-registration-at-init: true
-  instance:
-    prefer-ip-address: true
     serviceUrl:
       defaultZone: http://discovery-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
     registry-fetch-interval-seconds: 5
