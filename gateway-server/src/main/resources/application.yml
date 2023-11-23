@@ -4,4 +4,3 @@ spring:
   cloud:
     config:
       label: 007-Docker
-
