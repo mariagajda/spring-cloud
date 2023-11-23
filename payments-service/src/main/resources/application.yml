@@ -5,5 +5,5 @@ spring:
     import: optional:configserver:http://localhost:8888,optional:configserver:http://localhost:8889 # wskazuje adres serwera konfiguracyjnego
   cloud:
     config:
-      label: 000-Starter # może oznaczać brancha lub tag
+      label: main # może oznaczać brancha lub tag
       #fail-fast: true # w przypadku braku dostępności serwera konfiguracji, aplikacja zakończy działanie (wyjątek)

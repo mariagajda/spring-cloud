@@ -28,19 +28,19 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8888/000-Starter/application-default.yml
+GET http://localhost:8888/main/application-default.yml
 
 ###
 
-GET http://localhost:8888/000-Starter/application-development.properties
+GET http://localhost:8888/main/application-development.properties
 
 ###
 
-GET http://localhost:8888/000-Starter/payments-service-development.properties
+GET http://localhost:8888/main/payments-service-development.properties
 
 ###
 
-GET http://localhost:8888/payments-service-/default/000-Starter/data.xml
+GET http://localhost:8888/payments-service-/default/main/data.xml
 
 ###
 
@@ -128,4 +128,4 @@ abb1ccca50bee79b98939159e9df13bf4f9715aa23fa6d0d305936bfb977b96a
 
 ###
 
-GET http://localhost:8888/000-Starter/shop-service-development.properties
+GET http://localhost:8888/main/shop-service-development.properties
