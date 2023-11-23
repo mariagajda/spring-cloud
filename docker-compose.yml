@@ -27,7 +27,14 @@ services:
     environment:
       PROFILES: production
       CONFIG_SERVER_URI: optional:configserver:http://configuration-server:8888
-
+  gateway-server:
+    image: gateway-server
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    environment:
+      PROFILES: default
+      CONFIG_SERVER_URI: optional:configserver:http://configuration-server:8888
 
 
 #  postgres-server:
