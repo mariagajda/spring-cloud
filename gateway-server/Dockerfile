@@ -13,5 +13,6 @@ USER $USERNAME
 COPY target/gateway-server.jar /home/$USERNAME
 WORKDIR /home/$USERNAME
 CMD java -jar \
+    -Dspring.profiles.active=$PROFILES \
     -Dspring.config.import=$CONFIG_SERVER_URI \
     gateway-server.jar

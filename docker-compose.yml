@@ -33,6 +33,7 @@ services:
     ports:
       - "8080:8080"
     environment:
+      PROFILES: production
       CONFIG_SERVER_URI: optional:configserver:http://configuration-server:8888
 
 

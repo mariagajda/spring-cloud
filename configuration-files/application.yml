@@ -3,8 +3,6 @@ logging:
     org.javamoney.moneta: OFF
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://discovery-server/eureka/
+    should-enforce-registration-at-init: true
   instance:
     prefer-ip-address: true
-    registry-fetch-interval-seconds: 5
