@@ -1,12 +1,21 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: echo-server-replication-controller
+  name: echo-server-deployment
   namespace: training
+  annotations:
+    kubernetes.io/change-cause: "Initial release"
 spec:
   replicas: 5
   selector:
-    app-name: echo-server
+    #matchLabels:
+    #  app-name: echo-server
+    matchExpressions:
+      - key: app-name
+        values:
+          - echo-server
+          - echo-service
+        operator: In
   template:
     metadata:
       namespace: training
@@ -17,7 +26,7 @@ spec:
     spec:
       containers:
         - name: echo-server
-          image: landrzejewski/echo-server:v2
+          image: landrzejewski/echo-server:v1
           ports:
             - containerPort: 8080
               name: http
